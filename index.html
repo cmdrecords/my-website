@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основы HTML/CSS - Начни создавать сайты с нуля</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+</head>
+<body>
+
+
+    <style>
+          /* Сброс стилей */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Переменные для цветов */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0ea5e9;
+            --accent: #f97316;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --success: #22c55e;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 24px;
+            color: var(--primary);
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Герой секция */
+        .hero {
+            background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.05)" points="0,100 100,0 100,100"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .code-card {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .code-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .dot-red { background-color: #f87171; }
+        .dot-yellow { background-color: #fbbf24; }
+        .dot-green { background-color: #34d399; }
+        
+        .code-content {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+        
+        .code-tag { color: #60a5fa; }
+        .code-attr { color: #fbbf24; }
+        .code-value { color: #34d399; }
+        .code-text { color: #e2e8f0; }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn-light {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .btn-light:hover {
+            background-color: var(--light);
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Преимущества */
+        .features {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+            color: var(--primary);
+        }
+        
+        .feature-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .feature-text {
+            color: var(--gray);
+        }
+        
+        /* Секция с куратором */
+        .curator {
+            padding: 100px 0;
+            background: linear-gradient(to right, var(--light) 50%, #f1f5f9 50%);
+        }
+        
+        .curator-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .curator-image {
+            flex: 1;
+            position: relative;
+        }
+        
+        .curator-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            background-image: url(gpt.png);
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            border-radius: 12px;
+        }
+        
+        .curator-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--accent);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+        }
+        
+        .curator-content {
+            flex: 1;
+        }
+        
+        .curator-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .curator-text {
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        
+        .benefits {
+            margin: 30px 0;
+        }
+        
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-icon {
+            width: 24px;
+            height: 24px;
+            background-color: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+        
+        /* Программа курса */
+        .program {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .modules {
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+        
+        .module {
+            border-left: 3px solid var(--primary);
+            padding: 0 0 40px 30px;
+            position: relative;
+        }
+        
+        .module:last-child {
+            padding-bottom: 0;
+        }
+        
+        .module::before {
+            content: "";
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background-color: var(--primary);
+            border-radius: 50%;
+        }
+        
+        .module-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .module-topics {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            color: var(--gray);
+        }
+        
+        /* Отзывы */
+        .testimonials {
+            padding: 100px 0;
+            background-color: #f1f5f9;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: var(--gray);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-text::before {
+            content: """;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            font-size: 60px;
+            color: rgba(37, 99, 235, 0.1);
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .author-role {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        /* Цены */
+        .pricing {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .pricing-card {
+            background-color: var(--light);
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .pricing-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .price span {
+            font-size: 16px;
+            color: var(--gray);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features li i {
+            color: var(--success);
+        }
+        
+        /* Призыв к действию */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: var(--dark);
+            color: #cbd5e1;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer-text {
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-title {
+            font-size: 18px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            h1 { font-size: 40px; }
+            .hero-content { flex-direction: column; }
+            .curator-container { flex-direction: column; }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; gap: 20px; }
+            nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
+            h1 { font-size: 32px; }
+            .section-title { font-size: 28px; }
+            .cta-buttons { flex-direction: column; }
+            .btn { width: 100%; }
+        }
+    </style>
+
+
+
+
+
+
+
+    </style>
+
+
+
+
+
+
+
+
+    <!-- Шапка -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-code"></i></div>
+                <div class="logo-text">КиберКуб</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#program">Программа</a></li>
+                    <li><a href="#features">Преимущества</a></li>
+                    <li><a href="#pricing">Стоимость</a></li>
+                    <li><a href="#testimonials">Отзывы</a></li>
+                </ul>
+            </nav>
+            <a href="#cta" class="btn">Начать обучение</a>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Основы HTML/CSS: Создай свой первый сайт за 4 недели</h1>
+                <p class="subtitle">Научись верстать современные сайты с нуля под руководством персонального преподавателя</p>
+                <div class="cta-buttons">
+                    <a href="#pricing" class="btn btn-light">Выбрать тариф</a>
+                    <a href="#program" class="btn btn-outline">Программа курса</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="code-card">
+                    <div class="code-header">
+                        <div class="code-dot dot-red"></div>
+                        <div class="code-dot dot-yellow"></div>
+                        <div class="code-dot dot-green"></div>
+                    </div>
+                    <div class="code-content">
+                        <span class="code-tag">&lt;div</span> <span class="code-attr">class=</span><span class="code-value">"container"</span><span class="code-tag">&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;h1&gt;</span><span class="code-text">Привет, мир!</span><span class="code-tag">&lt;/h1&gt;</span><br>
+                        &nbsp;&nbsp;<span class="code-tag">&lt;p&gt;</span><span class="code-text">Я создал свою первую веб-страницу!</span><span class="code-tag">&lt;/p&gt;</span><br>
+                        <span class="code-tag">&lt;/div&gt;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают наш курс</h2>
+            <p class="section-subtitle">Мы создали идеальные условия для вашего старта в веб-разработке</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">Поддержка куратора 24/7</h3>
+                    <p class="feature-text">Ваш персональный наставник всегда на связи - ответит на вопросы, проверит задания и поможет с трудностями</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="feature-title">Практика с первого дня</h3>
+                    <p class="feature-text">Теория сразу применяется на практике. Вы создадите 5 реальных проектов для портфолио</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Сообщество единомышленников</h3>
+                    <p class="feature-text">Доступ в закрытый чат с другими студентами для обмена опытом и совместной работы</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="feature-title">Сертификат об окончании</h3>
+                    <p class="feature-text">Официальный документ, подтверждающий ваши навыки в HTML и CSS</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="feature-title">Помощь с трудоустройством</h3>
+                    <p class="feature-text">Лучшим выпускникам помогаем составить резюме и подготовиться к собеседованиям</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Бесплатный доступ к обновлениям</h3>
+                    <p class="feature-text">Пожизненный доступ к курсу и всем будущим обновлениям материалов</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция с куратором -->
+    <section class="curator">
+        <div class="container curator-container">
+            <div class="curator-image">
+                <div class="curator-img"></div>
+                <div class="curator-badge">
+                    <i class="fas fa-star"></i> Куратор курса
+                </div>
+            </div>
+            <div class="curator-content">
+                <h2 class="curator-title">Ваш персональный наставник</h2>
+                <p class="curator-text">Бибизян Никита - фронтенд-разработчик с 7-летним опытом, создал более 100 веб-сайтов и обучил 500+ студентов.</p>
+                
+                <div class="benefits">
+                    <div class="benefit">
+                        <div class="benefit-icon"><i class="fas fa-check"></i></div>
+                        <div>Бибизян будет проверять каждое ваше задание с подробной обратной связью</div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon"><i class="fas fa-check"></i></div>
+                        <div>Ответит на любой вопрос по курсу в течение 1 часа в рабочее время</div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon"><i class="fas fa-check"></i></div>
+                        <div>Проведет 3 индивидуальные консультации по вашему финальному проекту</div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon"><i class="fas fa-check"></i></div>
+                        <div>Поможет составить портфолио для старта карьеры</div>
+                    </div>
+                </div>
+                
+                <p class="curator-text">"Моя цель - не просто научить вас коду, а помочь стать уверенным разработчиком, способным решать реальные задачи"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Программа курса -->
+    <section class="program" id="program">
+        <div class="container">
+            <h2 class="section-title">Программа курса</h2>
+            <p class="section-subtitle">4 недели интенсивного обучения с нуля до профессионального уровня</p>
+            
+            <div class="modules">
+                <div class="module">
+                    <h3 class="module-title">Неделя 1: Основы HTML</h3>
+                    <div class="module-topics">
+                        <p>Структура HTML-документа, работа с текстом, списки, ссылки, изображения. Семантическая верстка. Формы и элементы форм. Основы доступности.</p>
+                    </div>
+                </div>
+                
+                <div class="module">
+                    <h3 class="module-title">Неделя 2: Основы CSS</h3>
+                    <div class="module-topics">
+                        <p>Селекторы, каскадность, наследование. Работа с текстом, цветами, фонами. Блочная модель, Flexbox. Позиционирование элементов. Основы адаптивности.</p>
+                    </div>
+                </div>
+                
+                <div class="module">
+                    <h3 class="module-title">Неделя 3: Продвинутый CSS</h3>
+                    <div class="module-topics">
+                        <p>Grid Layout, анимации и переходы. Переменные CSS. Методологии именования (БЭМ). Препроцессоры SASS/SCSS. Адаптивная и мобильная верстка.</p>
+                    </div>
+                </div>
+                
+                <div class="module">
+                    <h3 class="module-title">Неделя 4: Финальный проект</h3>
+                    <div class="module-topics">
+                        <p>Верстка многостраничного сайта. Оптимизация производительности. Кроссбраузерная верстка. Размещение проекта в интернете. Сборка проекта.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Отзывы выпускников</h2>
+            <p class="section-subtitle">Что говорят наши студенты после прохождения курса</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Курс превзошел все ожидания! Особенно ценна поддержка куратора - Анна отвечала на вопросы даже ночью. Теперь я уверенно верстаю сайты и уже беру первые заказы.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">МК</div>
+                        <div>
+                            <div class="author-name">Мария Ковалева</div>
+                            <div class="author-role">Выпускница курса, фрилансер</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Никогда не думал, что смогу разобраться в программировании. Благодаря структурированной подаче материала и постоянной поддержке куратора, я освоил HTML и CSS всего за месяц!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">ДС</div>
+                        <div>
+                            <div class="author-name">Дмитрий Смирнов</div>
+                            <div class="author-role">Выпускник курса, начинающий разработчик</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Проходила много курсов, но здесь впервые получила настоящую поддержку. Куратор не просто отвечал на вопросы, а учил мыслить как разработчик. Финалка курса стала моим первым проектом в портфолио!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">АВ</div>
+                        <div>
+                            <div class="author-name">Анастасия Васнецова</div>
+                            <div class="author-role">Выпускница курса, frontend-стажер</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Цены -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Выберите подходящий тариф</h2>
+            <p class="section-subtitle">Начните обучение уже сегодня с гарантией возврата в течение 14 дней</p>
+            
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Стандарт</h3>
+                    <div class="price">9 900 <span>руб.</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Доступ ко всем урокам</li>
+                        <li><i class="fas fa-check"></i> Практические задания</li>
+                        <li><i class="fas fa-check"></i> Проверка 5 заданий</li>
+                        <li><i class="fas fa-check"></i> Доступ к сообществу</li>
+                        <li><i class="fas fa-times"></i> Поддержка куратора</li>
+                        <li><i class="fas fa-times"></i> Индивидуальные консультации</li>
+                    </ul>
+                    <a href="#cta" class="btn btn-outline">Выбрать тариф</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="popular-badge">Популярный</div>
+                    <h3 class="pricing-title">С куратором</h3>
+                    <div class="price">14 900 <span>руб.</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Доступ ко всем урокам</li>
+                        <li><i class="fas fa-check"></i> Практические задания</li>
+                        <li><i class="fas fa-check"></i> Проверка всех заданий</li>
+                        <li><i class="fas fa-check"></i> Доступ к сообществу</li>
+                        <li><i class="fas fa-check"></i> Поддержка куратора 24/7</li>
+                        <li><i class="fas fa-check"></i> 3 индивидуальные консультации</li>
+                    </ul>
+                    <a href="#cta" class="btn">Выбрать тариф</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3 class="pricing-title">Премиум</h3>
+                    <div class="price">19 900 <span>руб.</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Доступ ко всем урокам</li>
+                        <li><i class="fas fa-check"></i> Практические задания</li>
+                        <li><i class="fas fa-check"></i> Проверка всех заданий</li>
+                        <li><i class="fas fa-check"></i> Доступ к сообществу</li>
+                        <li><i class="fas fa-check"></i> Поддержка куратора 24/7</li>
+                        <li><i class="fas fa-check"></i> 6 индивидуальных консультаций + помощь с трудоустройством</li>
+                    </ul>
+                    <a href="#cta" class="btn btn-outline">Выбрать тариф</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Призыв к действию -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <h2 class="cta-title">Начни создавать сайты уже сегодня!</h2>
+            <p class="cta-subtitle">Присоединяйтесь к 1500+ студентов, которые уже освоили веб-разработку с нашим курсом</p>
+            <a href="#" class="btn btn-light">Записаться на курс</a>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="#" class="footer-logo">КиберКуб</a>
+                    <p class="footer-text">Обучаем веб-разработке с 2018 года. Наши студенты работают в ведущих IT-компаниях и создают успешные проекты.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Курсы</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Основы HTML/CSS</a></li>
+                        <li><a href="#">JavaScript для начинающих</a></li>
+                        <li><a href="#">React с нуля</a></li>
+                        <li><a href="#">Веб-дизайн в Figma</a></li>
+                        <li><a href="#">Backend на Node.js</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Компания</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Преподаватели</a></li>
+                        <li><a href="#">Отзывы</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">Помощь</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                        <li><a href="#">Условия использования</a></li>
+                        <li><a href="#">Возврат средств</a></li>
+                        <li><a href="#">Техническая поддержка</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 КиберКуб. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
